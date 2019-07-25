@@ -10,15 +10,23 @@ service hello on new http:Listener(9090) {
 		
 		int number = check int.convert(<string>params.number);
 	
-		var answer = true;
-		foreach var i in 2...(number-1) {
-		        if(number % i == 0){
-				answer = false;
-				break; 	
+		int count = 0;
+
+		foreach var i in 3...(number) {
+			var prime = true;
+		        foreach var j in 2...(i-1) {
+		 	       if(i % j == 0){
+					prime = false;
+					break; 	
+				}
+			}
+			if(prime==true){
+				count = count+1;
 			}
 		}
 		
-		response.setTextPayload(untaint io:sprintf("%s", answer));
+		
+		response.setTextPayload(untaint io:sprintf("%s", count));
 		check caller->respond(response);
     	}
 }
