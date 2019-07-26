@@ -2,9 +2,9 @@
 // Module objects referenced with 'http:' in code
 import ballerina/http;
 
-service hello on new http:Listener(9090) {
+service microbenchmark on new http:Listener(9090) {
 
-	resource function sayHello(http:Caller caller, http:Request request) returns error? {
+	resource function io(http:Caller caller, http:Request request) returns error? {
 		http:Response response = new;
 		var params = request.getQueryParams();
 		var message = <string>params.message;

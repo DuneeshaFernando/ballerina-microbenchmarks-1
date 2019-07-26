@@ -12,9 +12,9 @@ jdbc:Client testDB = new({
         dbOptions: { useSSL: false }
     });
 
-service hello on new http:Listener(9090) {
+service microbenchmark on new http:Listener(9090) {
 
-	resource function sayHello(http:Caller caller, http:Request request) returns error? {
+	resource function db(http:Caller caller, http:Request request) returns error? {
 		http:Response response = new;
 		var params = request.getQueryParams();
 		var id = <string>params.id;
