@@ -11,7 +11,8 @@ service microbenchmark on new http:Listener(9090) {
 		var filename = "/home/pasindu/Project/WSO2/Server-Architectures/file_server/"+<string>params.file;
 		io:ReadableCharacterChannel sourceChannel = new(io:openReadableFile(untaint filename), "UTF-8");
 		int file_size = check int.convert(<string>params.file);
-		string fileText = check sourceChannel.read(untaint file_size);		
+		string fileText = check sourceChannel.read(untaint file_size);	
+		var close_result = sourceChannel.close();	
 		response.setTextPayload(untaint fileText);
 		check caller->respond(response);
     	}
